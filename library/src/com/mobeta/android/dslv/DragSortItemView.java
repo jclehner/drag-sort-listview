@@ -5,7 +5,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.widget.ListView;
+import android.widget.FrameLayout;
 import android.util.Log;
 
 /**
@@ -23,74 +24,20 @@ import android.util.Log;
  * The purpose of this class is to optimize slide
  * shuffle animations.
  */
-public class DragSortItemView extends ViewGroup {
-
-    private int mGravity = Gravity.TOP;
+public class DragSortItemView extends FrameLayout {
 
     public DragSortItemView(Context context) {
         super(context);
 
         // always init with standard ListView layout params
-        setLayoutParams(new AbsListView.LayoutParams(
+        setLayoutParams(new ListView.LayoutParams(
                 ViewGroup.LayoutParams.FILL_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         //setClipChildren(true);
     }
 
-    public void setGravity(int gravity) {
-        mGravity = gravity;
-    }
-
-    public int getGravity() {
-        return mGravity;
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        final View child = getChildAt(0);
-
-        if (child == null) {
-            return;
-        }
-
-		child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-    }
-
-    /**
-     * 
-     */
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        
-        int height = MeasureSpec.getSize(heightMeasureSpec);
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
-        final View child = getChildAt(0);
-        if (child == null) {
-            setMeasuredDimension(0, width);
-            return;
-        }
-
-        if (child.isLayoutRequested()) {
-            // Always let child be as tall as it wants.
-            measureChild(child, widthMeasureSpec,
-                    MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-        }
-
-        if (heightMode == MeasureSpec.UNSPECIFIED) {
-            ViewGroup.LayoutParams lp = getLayoutParams();
-
-            if (lp.height > 0) {
-                height = lp.height;
-            } else {
-                height = child.getMeasuredHeight();
-            }
-        }
-
-        setMeasuredDimension(width, height);
-    }
-
+	public void setGravity(int gravity) {
+		// stub
+	}
 }

@@ -54,11 +54,7 @@ public class DragSortItemView extends ViewGroup {
             return;
         }
 
-        if (mGravity == Gravity.TOP) {
-            child.layout(0, 0, getMeasuredWidth(), child.getMeasuredHeight());
-        } else {
-            child.layout(0, getMeasuredHeight() - child.getMeasuredHeight(), getMeasuredWidth(), getMeasuredHeight());
-        }
+		child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
     }
 
     /**
